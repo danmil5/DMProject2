@@ -28,7 +28,7 @@
 // The encounter rates are calculated after the chance of actually finding...
 // a Pokemon with each step, which is originally 5.33%, however due to the...
 // decrease in allowed steps, the propotional catch rate for this project...
-// will be 53.3% per step. Ex: Pikachu's overall encounter rate 2.7% is per step.
+// will be 35.5% per step..
 
 // Catch Rate:
 // The likelihood of catching a Pokemon in the Safari Zone is determined by...
@@ -54,6 +54,14 @@
 // Boolean: True or False Values
 // String: Non-Numerical Values
 
+// A variable is most similar to a box which a value can be put into, or ...
+// "assigned to," which allows more convenient expression and usage of the ...
+// value contained within the variable.
+
+// The term scope refers to the access that a class has to a variable or set...
+// of variables, most notably used when describing the ability of classes to...
+// access only private variables declared within that specific class.
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -65,8 +73,8 @@ public class Main {
     Random rand = new Random();
     
     // The catch rate variables are not used yet, however they do help to...
-    // show an example of casting variables by creating integer-value copies...
-    // of double values and vice-versa to easily round down the variables,
+    // show an example of casting variables by creating integer-type copies...
+    // of double-type values and vice-versa to round down the variables...
     // since all variables regarding catch probability should be rounded down.
     double pikaCatchChance = (190*100)/1275;
     int pikaFactor = (int)pikaCatchChance;
@@ -112,7 +120,7 @@ public class Main {
     
     // Initialize double variable to be used, using the final keyword so that..
     // its value will remain constant throughout the program
-    final double encRate = 53.3;
+    final double encRate = 35.5;
     // Initialize integer variable to be used
     int encVar;
     // Initialize integer variable to be used
@@ -120,29 +128,27 @@ public class Main {
     // Initialize boolean variable to be used
     boolean randEnc;
     while (steps > 0) {
-      System.out.println("You have " + steps + " left!");
+      System.out.println("You have " + steps + " steps left!");
       System.out.println("Press \"\\ENTER\\\" to continue.");
       scan.nextLine();
       try {
         System.out.println("You take a few steps forward...");
-        Thread.sleep(1500);
-        System.out.println("You hear rustling in the bushes beside you...");
-        Thread.sleep(2000);
-        System.out.println("And...");
         Thread.sleep(1000);
+        System.out.println("You hear rustling in the bushes beside you...");
+        Thread.sleep(1500);
+        System.out.println("And...");
+        Thread.sleep(500);
       } catch (InterruptedException ie) {
           ie.printStackTrace();
         }
       // Generate a random number from 1 to 100 and compare it to the base..
       // encounter rate to determine if a Pokemon is encountered.
       encVar = rand.nextInt(100) + 1;
-      if (encVar < encRate) {
-        randEnc = true;
-      }
-      else 
-        randEnc = false;
       
-      if (randEnc = true) {
+      // This was where the boolean variable I used in the example was...
+      // located, however it was much easier to do without it.
+      
+      if (encVar < encRate) {
         System.out.println("You have encountered a Pokemon!");
         // Use rng to determine what Pokemon was encountered and to determine..
         // both its flee and capture rates.
@@ -155,6 +161,8 @@ public class Main {
       // Afterwards, repeat the method by prompting user to take another step
     }
     System.out.println("Your 50 steps are up! Thanks for playing!");
+    // This would be the part where the program tells the user what Pokemon...
+    // they've caught and how many of each Pokemon they've caught.
   // Close the scanner
   scan.close();
   }
