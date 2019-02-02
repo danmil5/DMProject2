@@ -126,7 +126,6 @@ public class Main {
     // Initialize integer variable to be used
     int steps = 50;
     // Initialize boolean variable to be used
-    boolean randEnc;
     while (steps > 0) {
       System.out.println("You have " + steps + " steps left!");
       System.out.println("Press \"\\ENTER\\\" to continue.");
