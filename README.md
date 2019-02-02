@@ -44,6 +44,7 @@ Use casting and describe what it means in a comment:
     double pikaCatchChance = (190*100)/1275;
     int pikaFactor = (int)pikaCatchChance;
     double pikaFactor2 = (double)pikaFactor;
+    Casting means to create an x-type variable copy of a y-type variable.
 
 Format strings using escape sequences:  
   String continue = "\"\\ENTER\\\""
