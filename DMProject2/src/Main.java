@@ -152,7 +152,7 @@ public class Main {
 
       if (encVar < encRate) {
     	enco = rand.nextInt(100);
-    	pmon = encounter.Enc(enco);
+    	pmon = Encounter.Enc(enco);
     	
         System.out.println("You have encountered a " + pmon + "!");
         
