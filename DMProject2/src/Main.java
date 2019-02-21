@@ -90,6 +90,9 @@ public class Main {
     // used, and if the random number from 1-100 is less than pikaCatchProb...
     // (which in this case is 84.7%) then the Pikachu will be caught.
     
+    // Variables Used to Determine Which Pokemon is Encountered
+    int enco;
+    String pmon;
   
     // Console output requirement
     System.out.println("Welcome to the Hoenn Safari Zone!");
@@ -146,9 +149,13 @@ public class Main {
       
       // This was where the boolean variable I used in the example was...
       // located, however it was much easier to do without it.
-      
+
       if (encVar < encRate) {
-        System.out.println("You have encountered a Pokemon!");
+    	enco = rand.nextInt(100);
+    	pmon = encounter.Enc(enco);
+    	
+        System.out.println("You have encountered a " + pmon + "!");
+        
         // Use rng to determine what Pokemon was encountered and to determine..
         // both its flee and capture rates.
         --steps;
