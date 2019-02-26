@@ -1,4 +1,7 @@
 # DMProject2  
+
+PSI 1 Requirements:  
+
 Add your name as a comment at top of every file:  
   Done  
 
@@ -49,3 +52,61 @@ Use casting and describe what it means in a comment:
 Format strings using escape sequences:  
   String continue = "\"\\ENTER\\\""  
   System.out.println("Press " + continue + " to continue.");  
+  
+  
+PSI 2 Requirements:  
+
+Create a method with arguments and return values:  
+Done  
+
+Identify a method call and argument in comments:  
+Done  
+
+Identify a header and parameter in comments:  
+Done  
+
+Use the Random class:  
+Done  
+
+Use the Math class:  
+Done  
+
+Create if/else constructs:  
+Done  
+
+Create ternary constructs:
+Done  
+
+Use a switch statement:  
+Done  
+
+Compare two String objects by using the compareTo and equals methods and make  
+a comment describing how == works with objects:  
+Done  
+
+Use +, -, *, /, %, ++, --, +=:  
+Done  
+
+Use relational operators:  
+Done  
+
+Use conditional operators:  
+Done  
+
+Describe operator precedence as a comment:  
+Done  
+
+Create and use while loops:  
+Done  
+
+Create and use for loops:  
+Done  
+
+Create and use do/while loops:  
+Done  
+
+Use break in a loop with a comment describing what it does:  
+Done  
+
+Use continue in a loop with a comment describing what it does:  
+Done
