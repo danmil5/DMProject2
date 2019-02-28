@@ -71,39 +71,39 @@ public class Main {
     // Create scanner and random tools
     Scanner scan = new Scanner(System.in);
     Random rand = new Random();
-    
+
     // The catch rate variables are not used yet, however they do help to...
     // show an example of casting variables by creating integer-type copies...
     // of double-type values and vice-versa to round down the variables...
     // since all variables regarding catch probability should be rounded down.
-    double pikaCatchChance = (190*100)/1275;
-    int pikaFactor = (int)pikaCatchChance;
-    double pikaFactor2 = (double)pikaFactor;
+    double pikaCatchChance = (190 * 100) / 1275;
+    int pikaFactor = (int) pikaCatchChance;
+    double pikaFactor2 = (double) pikaFactor;
     // For this example, the catch factor will be increased by 3, which...
     // originally occurs when approaching the Pokemon for the first time.
     pikaFactor2 = pikaFactor2 + 3;
-    double pikaNewFactor = (pikaFactor2*1275)/100;
-    int pikaNewCatch = (int)pikaNewFactor;
-    double pikaCatch2 = (double)pikaNewCatch;
-    double pikaCatchProb = (pikaCatch2/255)*100;
+    double pikaNewFactor = (pikaFactor2 * 1275) / 100;
+    int pikaNewCatch = (int) pikaNewFactor;
+    double pikaCatch2 = (double) pikaNewCatch;
+    double pikaCatchProb = (pikaCatch2 / 255) * 100;
     // When a Safari Ball is thrown at this point, the random tool would be...
     // used, and if the random number from 1-100 is less than pikaCatchProb...
     // (which in this case is 84.7%) then the Pikachu will be caught.
-    
+
     // Variables Used to Determine Which Pokemon is Encountered
     int enco;
     String pmon;
-    
+
     // Variable to determine if encounter takes place and boolean requirement
     boolean battle;
     // Additional encounter-related variables
     int flee = 99;
     int escape;
     int caught;
-  
+
     // Create a variable to satisfy the ternary operator requirement later on
     String only;
-    
+
     // Strings to be used at the beginning just for show
     String start;
     String startChar;
@@ -114,40 +114,37 @@ public class Main {
     int k;
     // For loop requirement
     for (k = 1; k <= 5; k++) {
-    	System.out.println("Please type an integer less than 9!");
-    	num = scan.nextLine();
-    	System.out.println(num.compareTo("9"));
-    	try {
-    	  num2 = Integer.parseInt(num);
-    	} catch (NumberFormatException e) {
-    	  if (k < 5)
-    	    System.out.println("Please type only numbers!");
-    	  continue;
-    	}
-    	if ((num.compareTo("9") < 0) && (num2 < 9)){
-          k = 7;
-    	}
-    	else if (num2 >= 9) {
-    	  System.out.println("Please type only numbers less than 9!");
-    	}
-    	else {
-    		System.out.println("Sorry, could you try that again?");
-    	}
+      System.out.println("Please type an integer less than 9!");
+      num = scan.nextLine();
+      System.out.println(num.compareTo("9"));
+      try {
+        num2 = Integer.parseInt(num);
+      } catch (NumberFormatException e) {
+        if (k < 5)
+          System.out.println("Please type only numbers!");
+        continue;
+      }
+      if ((num.compareTo("9") < 0) && (num2 < 9)) {
+        k = 7;
+      } else if (num2 >= 9) {
+        System.out.println("Please type only numbers less than 9!");
+      } else {
+        System.out.println("Sorry, could you try that again?");
+      }
     }
-    
+
     if (k == 6) {
-    	System.out.println("I think I've given you enough tries already..."
-    			+ " let's just pretend that you typed the number 5!");
-    	num2 = 5;
+      System.out.println("I think I've given you enough tries already..."
+          + " let's just pretend that you typed the number 5!");
+      num2 = 5;
     }
-    System.out.println("Just to let you know,"
-    		+ " your number divided by 2 is " + num2/2 + " with "
-    				+ "a remainder of " + num2%2 + ", and your number squared "
-    						+ " is " + Math.pow(num2, 2) + "!");
-    
+    System.out.println("Just to let you know," + " your number divided by 2 is " + num2 / 2
+        + " with " + "a remainder of " + num2 % 2 + ", and your number squared " + " is "
+        + Math.pow(num2, 2) + "!");
+
     // Console output requirement
-    System.out.println("Now with all that out of the way, I'd like to welcome "
-    		+ "you to the Hoenn Safari Zone!");
+    System.out.println(
+        "Now with all that out of the way, I'd like to welcome " + "you to the Hoenn Safari Zone!");
     int n = 0;
     while (n == 0) {
       System.out.println("You'll have 50 steps, ready to begin? (y/n)");
@@ -158,8 +155,7 @@ public class Main {
       if (startChar.charAt(0) == 'y') {
         System.out.println("Great, let's begin!");
         n = 1;
-      }
-      else if (startChar.charAt(0) == 'n'){
+      } else if (startChar.charAt(0) == 'n') {
         System.out.println("Are you sure? (y/n)");
         // Again, check to see if user input begins with "y"
         confirm = scan.nextLine();
@@ -168,19 +164,16 @@ public class Main {
         if (confChar.equals("y")) {
           System.out.println("Well that's too bad, let's begin!");
           n = 1;
-        }
-        else if (confChar.charAt(0) == 'n') {
+        } else if (confChar.charAt(0) == 'n') {
           System.out.println("Alrighty then, I'll ask again!");
-        }
-        else {
+        } else {
           System.out.println("I didn't quite catch that, so I'll ask again!");
-        }   
-      }
-      else {
+        }
+      } else {
         System.out.println("I didn't quite catch that, so I'll ask again!");
       }
     }
-    
+
     // Initialize double variable to be used, using the final keyword so that..
     // its value will remain constant throughout the program
     final double encRate = 35.5;
@@ -191,8 +184,8 @@ public class Main {
     // While loop requirement
     while (steps > 0) {
       // Mandatory ternary operator to determine if the word "only" is used
-      only = (steps<=10 ? " only" : "");
-      
+      only = (steps <= 10 ? " only" : "");
+
       System.out.println("");
       System.out.println("You" + only + " have " + steps + " steps left!");
       System.out.println("Press \"\\ENTER\\\" to continue.");
@@ -205,51 +198,52 @@ public class Main {
         System.out.println("And...");
         Thread.sleep(500);
       } catch (InterruptedException ie) {
-          ie.printStackTrace();
-        }
+        ie.printStackTrace();
+      }
       // Generate a random number from 1 to 100 and compare it to the base..
       // encounter rate to determine if a Pokemon is encountered.
       encVar = rand.nextInt(100) + 1;
-      
+
       // This was where the boolean variable I used in the example was...
       // located, however it was much easier to do without it.
 
       if (encVar < encRate) {
         // Call the Enc method to determine which pokemon appears
-    	enco = rand.nextInt(100);
-    	pmon = Encounter.Enc(enco);
-    	battle = true;
-    	
-    	// Use switch statement to display the encountered pokemon
-    	switch(pmon) {
-    	  case "Pikachu": 
-    	    System.out.println("You have encountered a wild Pikachu!");
-    	    break;
-    	  case "Oddish":
-    	    System.out.println("You have encountered a wild Oddish!");
-    	    break;
-    	  case "Gloom":
-    	    System.out.println("You have encountered a wild Gloom!");
-    	    break;
-    	  case "Doduo":
-    	    System.out.println("You have encountered a wild Doduo!");
-    	    break;
-    	  case "Natu":
-    	    System.out.println("You have encountered a wild Natu!");
-    	    break;
-    	  case "Girafarig":
-    	    System.out.println("You have encountered a wild Girafarig!");
-    	    break;
-    	  case "Wobbuffet":
-    	    System.out.println("You have encountered a wild Wobbuffet!");
-    	    break;
-    	  default: battle = false;
-    	    System.out.println("You have encountered.. nothing?");
-    	    break;
-    	}
-        
-    	if (battle = true) {
-    	  // All battle-related code goes here
+        enco = rand.nextInt(100);
+        pmon = Encounter.Enc(enco);
+        battle = true;
+
+        // Use switch statement to display the encountered pokemon
+        switch (pmon) {
+          case "Pikachu":
+            System.out.println("You have encountered a wild Pikachu!");
+            break;
+          case "Oddish":
+            System.out.println("You have encountered a wild Oddish!");
+            break;
+          case "Gloom":
+            System.out.println("You have encountered a wild Gloom!");
+            break;
+          case "Doduo":
+            System.out.println("You have encountered a wild Doduo!");
+            break;
+          case "Natu":
+            System.out.println("You have encountered a wild Natu!");
+            break;
+          case "Girafarig":
+            System.out.println("You have encountered a wild Girafarig!");
+            break;
+          case "Wobbuffet":
+            System.out.println("You have encountered a wild Wobbuffet!");
+            break;
+          default:
+            battle = false;
+            System.out.println("You have encountered.. nothing?");
+            break;
+        }
+
+        if (battle = true) {
+          // All battle-related code goes here
           System.out.println("");
           escape = 3;
           // Do-while loop requirement
@@ -265,28 +259,25 @@ public class Main {
               System.out.println("You caught the wild " + pmon + "!");
               // Break statement will exit the loop if pokemon has been caught
               break;
-            }
-            else if (caught >=25 && caught < 50) {
-            	// If the ball misses, the next loop will be iterated before..
-            	// the pokemon has a chance to flee.
-            	System.out.println("The Safari Ball missed! Try again!");
-            	continue;
-            }
-            else {
+            } else if (caught >= 25 && caught < 50) {
+              // If the ball misses, the next loop will be iterated before..
+              // the pokemon has a chance to flee.
+              System.out.println("The Safari Ball missed! Try again!");
+              continue;
+            } else {
               System.out.println("The " + pmon + " broke free!");
             }
-            
+
             flee = rand.nextInt(100);
             // Fulfills the += operator requirement
             escape += 5;
-            if (flee <= 3*escape) {
+            if (flee <= 3 * escape) {
               System.out.println("The wild " + pmon + " escaped!");
             }
-          } while (flee > 3*escape);
-    	}
+          } while (flee > 3 * escape);
+        }
         --steps;
-      }
-      else { 
+      } else {
         System.out.println("There's no Pokemon to be found...");
         --steps;
       }
@@ -295,7 +286,7 @@ public class Main {
     System.out.println("Your 50 steps are up! Thanks for playing!");
     // This would be the part where the program tells the user what Pokemon...
     // they've caught and how many of each Pokemon they've caught.
-  // Close the scanner
-  scan.close();
+    // Close the scanner
+    scan.close();
   }
-}      
+}
