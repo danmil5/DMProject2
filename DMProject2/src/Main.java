@@ -109,33 +109,41 @@ public class Main {
     String startChar;
     String confirm;
     String confChar;
-    int num = 5;
+    String num;
+    int num2 = 5;
     int k;
     // For loop requirement
     for (k = 1; k <= 5; k++) {
-    	System.out.println("Please type a positive integer less than 10!");
-    	num = scan.nextInt();
-    	if (num >= 0 && num < 10) {
-    		// Use the compareTo method to ensure the number is below 10
-    		String numCheck = Integer.toString(num);
-    		if (numCheck.compareTo("10") < 0) {
-    			k = 8;
-    		}
+    	System.out.println("Please type an integer less than 9!");
+    	num = scan.nextLine();
+    	System.out.println(num.compareTo("9"));
+    	try {
+    	  num2 = Integer.parseInt(num);
+    	} catch (NumberFormatException e) {
+    	  if (k < 5)
+    	    System.out.println("Please type only numbers!");
+    	  continue;
+    	}
+    	if ((num.compareTo("9") < 0) && (num2 < 9)){
+          k = 7;
+    	}
+    	else if (num2 >= 9) {
+    	  System.out.println("Please type only numbers less than 9!");
     	}
     	else {
     		System.out.println("Sorry, could you try that again?");
     	}
     }
     
-    if (k == 5) {
+    if (k == 6) {
     	System.out.println("I think I've given you enough tries already..."
-    			+ " let's just pretend you typed the number 5!");
-    	num = 5;
+    			+ " let's just pretend that you typed the number 5!");
+    	num2 = 5;
     }
     System.out.println("Just to let you know,"
-    		+ " your number divided by 2 is " + num/2 + " with "
-    				+ "a remainder of " + num%2 + ", and your number raised to"
-    						+ " the power of 2 is " + Math.pow(num, 2) + "!");
+    		+ " your number divided by 2 is " + num2/2 + " with "
+    				+ "a remainder of " + num2%2 + ", and your number squared "
+    						+ " is " + Math.pow(num2, 2) + "!");
     
     // Console output requirement
     System.out.println("Now with all that out of the way, I'd like to welcome "
@@ -143,7 +151,8 @@ public class Main {
     int n = 0;
     while (n == 0) {
       System.out.println("You'll have 50 steps, ready to begin? (y/n)");
-      // Check to see if user input begins with "y" with "==" operator
+      // Check to see if user input begins with "y" using the "==" operator...
+      // which determines if both sides of the expression equal 'y'.
       start = scan.nextLine();
       startChar = start.toLowerCase();
       if (startChar.charAt(0) == 'y') {

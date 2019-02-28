@@ -15,8 +15,9 @@ Add a greeting / introduction to the user:
   System.out.println("Welcome to the Hoenn Safari Zone!");  
 
 Use a boolean variable with an appropriate name  (singular noun, lowerCamelCase):  
-  boolean yes = start.equalsIgnoreCase("y");  
-  if (yes = true) {  
+  battle = true;  
+  default: battle = false;  
+  if (battle = true) {    
 
 Use an int variable with an appropriate name (singular noun, lowerCamelCase):  
   int encVar = rand.nextInt(100) + 1;  
@@ -57,56 +58,68 @@ Format strings using escape sequences:
 PSI 2 Requirements:  
 
 Create a method with arguments and return values:  
-Done  
+	Created method "Enc" in class "Encounter"  
 
 Identify a method call and argument in comments:  
-Done  
+	pmon = Encounter.Enc(enco);  
+	with the argument "enco = rand.nextInt(100);"  
 
 Identify a header and parameter in comments:  
-Done  
+  Done  
 
 Use the Random class:  
-Done  
+  enco = rand.nextInt(100);  
 
 Use the Math class:  
-Done  
+  Math.pow(num2, 2)  
 
 Create if/else constructs:  
-Done  
+	if (battle = true) {   
 
 Create ternary constructs:
-Done  
+	only = (steps<=10 ? " only" : "");
 
 Use a switch statement:  
-Done  
+	switch(pmon) {  
+    	  case "Pikachu":  
 
 Compare two String objects by using the compareTo and equals methods and make  
 a comment describing how == works with objects:  
-Done  
+	num.compareTo("9") < 0  
+	confChar.equals("y")  
+	Done  
 
 Use +, -, *, /, %, ++, --, +=:  
-Done  
+	Done  
 
 Use relational operators:  
-Done  
+	if (enco>=0 && enco<=4) {  
 
 Use conditional operators:  
-Done  
+	if (enco>=0 && enco<=4) {  
 
 Describe operator precedence as a comment:  
-Done  
+	Done in the Encounter class  
 
 Create and use while loops:  
-Done  
+	while (n == 0) {  
+      System.out.println("You'll have 50 steps, ready to begin? (y/n)");  
 
 Create and use for loops:  
-Done  
+	for (k = 1; k <= 5; k++) {  
+    	System.out.println("Please type an integer less than 9!");  
 
 Create and use do/while loops:  
-Done  
+	do {  
+    		//body  
+	} while (flee > 3*escape);  
 
 Use break in a loop with a comment describing what it does:  
-Done  
+	// Break statement will exit the loop if pokemon has been caught  
+              break;  
 
 Use continue in a loop with a comment describing what it does:  
-Done
+	// If the ball misses, the next loop will be iterated before..  
+    // the pokemon has a chance to flee.  
+    System.out.println("The Safari Ball missed! Try again!");  
+    continue;  
