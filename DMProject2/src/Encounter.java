@@ -42,7 +42,9 @@ public class Encounter {
     	else if (enco>=90 && enco<=99) {
     		pmon = "Wobbuffet";
     	}
-    	else {}
+    	else {
+    	  
+    	}
 		
 		return pmon;
 	}
