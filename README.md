@@ -1,5 +1,7 @@
 # DMProject2  
 
+Daniel Miller
+
 PSI 1 Requirements:  
 
 Add your name as a comment at top of every file:  

@@ -1,3 +1,5 @@
+// Daniel Miller
+
 // Pikachu - Catch Rate 190 - Encounter Rate 5%
 // Oddish - Catch Rate 255 - Encounter Rate 40%
 // Gloom - Catch Rate 120 - Encounter Rate 5%
