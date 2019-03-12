@@ -76,16 +76,22 @@ public class Main {
     // show an example of casting variables by creating integer-type copies...
     // of double-type values and vice-versa to round down the variables...
     // since all variables regarding catch probability should be rounded down.
-    double pikaCatchChance = (190 * 100) / 1275;
+    
+    // Constants used to track of catch factor and catch probability changes:
+    int chanToFact = 100/1275;
+    int factToChan = 1275/100;
+    int chanToProb = 100/225;
+    
+    double pikaCatchChance = 190*chanToFact;
     int pikaFactor = (int) pikaCatchChance;
     double pikaFactor2 = (double) pikaFactor;
     // For this example, the catch factor will be increased by 3, which...
     // originally occurs when approaching the Pokemon for the first time.
     pikaFactor2 = pikaFactor2 + 3;
-    double pikaNewFactor = (pikaFactor2 * 1275) / 100;
+    double pikaNewFactor = pikaFactor2*factToChan;
     int pikaNewCatch = (int) pikaNewFactor;
     double pikaCatch2 = (double) pikaNewCatch;
-    double pikaCatchProb = (pikaCatch2 / 255) * 100;
+    double pikaCatchProb = pikaCatch2*chanToProb;
     // When a Safari Ball is thrown at this point, the random tool would be...
     // used, and if the random number from 1-100 is less than pikaCatchProb...
     // (which in this case is 84.7%) then the Pikachu will be caught.
@@ -111,21 +117,21 @@ public class Main {
     String confChar;
     String num;
     int num2 = 5;
-    int k;
+    int testAcc;
     // For loop requirement
-    for (k = 1; k <= 5; k++) {
+    for (testAcc = 1; testAcc <= 5; testAcc++) {
       System.out.println("Please type an integer less than 9!");
       num = scan.nextLine();
       System.out.println(num.compareTo("9"));
       try {
         num2 = Integer.parseInt(num);
       } catch (NumberFormatException e) {
-        if (k < 5)
+        if (testAcc < 5)
           System.out.println("Please type only numbers!");
         continue;
       }
       if ((num.compareTo("9") < 0) && (num2 < 9)) {
-        k = 7;
+        testAcc = 7;
       } else if (num2 >= 9) {
         System.out.println("Please type only numbers less than 9!");
       } else {
@@ -133,20 +139,23 @@ public class Main {
       }
     }
 
-    if (k == 6) {
+    if (testAcc == 6) {
       System.out.println("I think I've given you enough tries already..."
           + " let's just pretend that you typed the number 5!");
       num2 = 5;
     }
-    System.out.println("Just to let you know," + " your number divided by 2 is " + num2 / 2
-        + " with " + "a remainder of " + num2 % 2 + ", and your number squared " + " is "
+    System.out.println("Just to let you know," + 
+        " your number divided by 2 is " + num2 / 2
+        + " with " + "a remainder of " + num2 % 2 + 
+        ", and your number squared " + " is "
         + Math.pow(num2, 2) + "!");
 
     // Console output requirement
     System.out.println(
-        "Now with all that out of the way, I'd like to welcome " + "you to the Hoenn Safari Zone!");
-    int n = 0;
-    while (n == 0) {
+        "Now with all that out of the way, I'd like to welcome " 
+    + "you to the Hoenn Safari Zone!");
+    int loopTest = 0;
+    while (loopTest == 0) {
       System.out.println("You'll have 50 steps, ready to begin? (y/n)");
       // Check to see if user input begins with "y" using the "==" operator...
       // which determines if both sides of the expression equal 'y'.
@@ -154,7 +163,7 @@ public class Main {
       startChar = start.toLowerCase();
       if (startChar.charAt(0) == 'y') {
         System.out.println("Great, let's begin!");
-        n = 1;
+        loopTest = 1;
       } else if (startChar.charAt(0) == 'n') {
         System.out.println("Are you sure? (y/n)");
         // Again, check to see if user input begins with "y"
@@ -163,7 +172,7 @@ public class Main {
         // Equals method requirement
         if (confChar.equals("y")) {
           System.out.println("Well that's too bad, let's begin!");
-          n = 1;
+          loopTest = 1;
         } else if (confChar.charAt(0) == 'n') {
           System.out.println("Alrighty then, I'll ask again!");
         } else {
@@ -208,12 +217,14 @@ public class Main {
       // located, however it was much easier to do without it.
 
       if (encVar < encRate) {
-        // Call the Enc method to determine which pokemon appears
+        // Call the encounterPmon method to determine which Pokemon appears
         enco = rand.nextInt(100);
-        pmon = Encounter.Enc(enco);
+        // Use the randomly-generated "enco" variable as the argument, further
+        // explained in the "Encounter" class
+        pmon = Encounter.encounterPmon(enco);
         battle = true;
 
-        // Use switch statement to display the encountered pokemon
+        // Use switch statement to display the encountered Pokemon
         switch (pmon) {
           case "Pikachu":
             System.out.println("You have encountered a wild Pikachu!");
@@ -257,11 +268,11 @@ public class Main {
             caught = rand.nextInt(100);
             if (caught >= 50) {
               System.out.println("You caught the wild " + pmon + "!");
-              // Break statement will exit the loop if pokemon has been caught
+              // Break statement will exit the loop if Pokemon has been caught
               break;
             } else if (caught >= 25 && caught < 50) {
               // If the ball misses, the next loop will be iterated before..
-              // the pokemon has a chance to flee.
+              // the Pokemon has a chance to flee.
               System.out.println("The Safari Ball missed! Try again!");
               continue;
             } else {

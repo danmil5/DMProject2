@@ -11,10 +11,12 @@
 // The header determines the name of the method "Enc", and determines which...
 // type of variable will be returned, which in this case is a string.
 
-// The only parameter used is the integer "enco", which is a randomly generated
-// number that determines which pokemon will be encountered.
+// As stated in the Main class, the "enco" variable is passed as an argument
+// to fulfill the single parameter, which will be used to determine which
+// Pokemon will be encountered, the String value of which will be returned to
+// the Main class.
 public class Encounter {
-  public static String Enc(int enco) {
+  public static String encounterPmon(int enco) {
     String pmon = "";
     // All statements below fulfill conditional operator requirements
 
