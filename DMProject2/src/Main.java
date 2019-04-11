@@ -99,20 +99,26 @@ public class Main {
     // Variables Used to Determine Which Pokemon is Encountered
     int enco;
     String pmon;
+    String newName;
 
-    // Variable to determine if encounter takes place and boolean requirement
+    // Variable to determine if encounter takes place
     boolean battle;
     // Additional encounter-related variables
     int flee = 99;
     int escape;
     int caught;
-
+    
+    //Create an array to store Pokemon objects
+    Pokemon[] PmonArray = new Pokemon[50];
+    int pAcc = 0;
+    
     // Create a variable to satisfy the ternary operator requirement later on
     String only;
 
-    // Strings to be used at the beginning just for show
-    String start;
-    String startChar;
+    // Strings to be used at the beginning to fulfill PSI requirements
+    String start = "";
+    String startLower;
+    char startChar;
     String confirm;
     String confChar;
     String num;
@@ -120,20 +126,19 @@ public class Main {
     int testAcc;
     // For loop requirement
     for (testAcc = 1; testAcc <= 5; testAcc++) {
-      System.out.println("Please type an integer less than 9!");
+      System.out.println("Enter an integer less than 9!");
       num = scan.nextLine();
-      System.out.println(num.compareTo("9"));
       try {
         num2 = Integer.parseInt(num);
       } catch (NumberFormatException e) {
         if (testAcc < 5)
-          System.out.println("Please type only numbers!");
+          System.out.println("Please type only integers!");
         continue;
       }
       if ((num.compareTo("9") < 0) && (num2 < 9)) {
         testAcc = 7;
       } else if (num2 >= 9) {
-        System.out.println("Please type only numbers less than 9!");
+        System.out.println("Only type numbers less than 9 please!");
       } else {
         System.out.println("Sorry, could you try that again?");
       }
@@ -155,16 +160,27 @@ public class Main {
         "Now with all that out of the way, I'd like to welcome " 
     + "you to the Hoenn Safari Zone!");
     int loopTest = 0;
-    while (loopTest == 0) {
-      System.out.println("You'll have 50 steps, ready to begin? (y/n)");
+    while (loopTest < 5) {
+      System.out.println("You'll have 20 steps, ready to begin? (y/n)");
       // Check to see if user input begins with "y" using the "==" operator...
       // which determines if both sides of the expression equal 'y'.
-      start = scan.nextLine();
-      startChar = start.toLowerCase();
-      if (startChar.charAt(0) == 'y') {
+      try {
+        start = scan.nextLine();
+        startLower = start.toLowerCase();
+        startChar = startLower.charAt(0);
+      } catch (StringIndexOutOfBoundsException ex) {
+        System.out.println("Sorry, could you try that again?");
+        loopTest++;
+        if (loopTest >= 5) {
+          System.out.println("I've given you enough tries, so let's begin!");
+        }
+        continue;
+      }
+      
+      if (startChar == 'y') {
         System.out.println("Great, let's begin!");
-        loopTest = 1;
-      } else if (startChar.charAt(0) == 'n') {
+        loopTest = 5;
+      } else if (startChar == 'n') {
         System.out.println("Are you sure? (y/n)");
         // Again, check to see if user input begins with "y"
         confirm = scan.nextLine();
@@ -172,7 +188,7 @@ public class Main {
         // Equals method requirement
         if (confChar.equals("y")) {
           System.out.println("Well that's too bad, let's begin!");
-          loopTest = 1;
+          loopTest = 5;
         } else if (confChar.charAt(0) == 'n') {
           System.out.println("Alrighty then, I'll ask again!");
         } else {
@@ -189,11 +205,11 @@ public class Main {
     // Initialize running integer variable to be used
     int encVar;
     // Initialize running integer variable to be used
-    int steps = 50;
+    int steps = 20;
     // While loop requirement
     while (steps > 0) {
       // Mandatory ternary operator to determine if the word "only" is used
-      only = (steps <= 10 ? " only" : "");
+      only = (steps <= 5 ? " only" : "");
 
       System.out.println("");
       System.out.println("You" + only + " have " + steps + " steps left!");
@@ -269,7 +285,22 @@ public class Main {
             if (caught >= 50) {
               System.out.println("You caught the wild " + pmon + "!");
               // Break statement will exit the loop if Pokemon has been caught
+              System.out.println("Give your " + pmon + " a nickname:");
+              newName = scan.nextLine();
+              if (newName.length() == 0) {
+                PmonArray[pAcc] = new Pokemon(pmon, pmon);
+                System.out.println("Your " + pmon + " was sent to storage!");
+              }
+              else {
+                PmonArray[pAcc] = new Pokemon(newName, pmon);
+                System.out.println(newName + " was sent to storage!");
+              }
+              pAcc++;
+              
+              
+
               break;
+              
             } else if (caught >= 25 && caught < 50) {
               // If the ball misses, the next loop will be iterated before..
               // the Pokemon has a chance to flee.
@@ -294,7 +325,12 @@ public class Main {
       }
       // Afterwards, repeat the method by prompting user to take another step
     }
-    System.out.println("Your 50 steps are up! Thanks for playing!");
+    System.out.println("Your 50 steps are up! Here's everything you caught:");
+    for (int pNum = 0; pNum < pAcc; pNum++)
+      System.out.println(PmonArray[pNum].getName() + " the " 
+        + PmonArray[pNum].getSpecies());
+    System.out.println("");
+    System.out.println("Thanks for playing!");
     // This would be the part where the program tells the user what Pokemon...
     // they've caught and how many of each Pokemon they've caught.
     // Close the scanner
