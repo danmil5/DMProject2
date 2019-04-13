@@ -23,11 +23,11 @@ public class Encounter {
     // Due to operator precedence, the relational operators >= and <= are..
     // evaluated before the conditional operator &&.
 
-    if (enco >= 0 && enco <= 4) {
+    if (enco >= 0 && enco <= 14) {
       pmon = "Pikachu";
-    } else if (enco >= 5 && enco <= 44) {
+    } else if (enco >= 15 && enco <= 39) {
       pmon = "Oddish";
-    } else if (enco >= 45 && enco <= 49) {
+    } else if (enco >= 40 && enco <= 49) {
       pmon = "Gloom";
     } else if (enco >= 50 && enco <= 59) {
       pmon = "Doduo";
@@ -40,7 +40,6 @@ public class Encounter {
     } else {
 
     }
-
-    return pmon;
+      return pmon;
   }
 }

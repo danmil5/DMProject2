@@ -129,44 +129,54 @@ Use continue in a loop with a comment describing what it does:
     
 PSI 3 Requirements:  
 
-Make a class in a separate file with private fields, public getters and setters, a constructor with and without parameters  
+Make a class in a separate file with private fields, public getters and:  
+setters, a constructor with and without parameters  
 Done, EX: "Pokemon" class
 
-Overload a method  
+Overload a method:  
 
 
-Describe inheritance and its benefits  
+Describe inheritance and its benefits:  
+Inheritance is the concept by which a subclass can inherit the fields and  
+methods from another class. This is very beneficial when multiple subclasses  
+inherit from the same superclass, which saves a lot of time and makes the  
+code easier to follow.  
 
-
-Develop code that makes use of polymorphism  
-
+Develop code that makes use of polymorphism:  
+Done, EX: A "Pikachu" subclass which inherits from the "Pokemon" class can  
+be contained in an array designed to hold only "Pokemon"-type objects, and  
+overrides the "getSpecies" method to state "Mouse Pokemon" instead of  
+"Pikachu" when it is does not have a nickname.  
 
 Use super and this to access objects and constructors  
+Done, EX: Pikachu object using Pokemon-class constructor to establish fields:  
+
+Declare, instantiate, initialize and use a one-dimensional array:  
+Done  
+
+Manually find the smallest value in an array:  
 
 
-Declare, instantiate, initialize and use a one-dimensional array  
+Get a sum of the values in an array using an accumulator:  
+Done  
+
+Search an array and identify the index where a value was found:  
+Done, toward the end of the program a for loop searches the array of all  
+Pokemon and identifies the locations in the array at which an Oddish was  
+found using an "index plus one" value.  
+
+Create and use the enhanced for loop:  
+Done at the end of the program  
+
+Declare, instantiate, initialize and use multi-dimensional arrays:  
 
 
-Manually find the smallest value in an array  
+Declare and use an ArrayList of a given type:  
 
 
-Get a sum of the values in an array using an accumulator.  
+Search a two-dimensional array and identify the coordinates  
+where a value was found:  
 
 
-Search an array and identify the index where a value was found.  
-
-
-Create and use the enhanced for loop  
-
-
-Declare, instantiate, initialize and use multi-dimensional arrays  
-
-
-Declare and use an ArrayList of a given type  
-
-
-Search a two-dimensional array and identify the coordinates where a value was found  
-
-
-Effectively utilize exception handling for user input of an int  
-
+Effectively utilize exception handling for user input of an int:  
+Done at beginning of program (Somewhere around line 136)  
