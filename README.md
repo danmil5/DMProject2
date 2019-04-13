@@ -125,8 +125,8 @@ Use continue in a loop with a comment describing what it does:
     // the pokemon has a chance to flee.  
     System.out.println("The Safari Ball missed! Try again!");  
     continue;  
-    
-    
+
+
 PSI 3 Requirements:  
 
 Make a class in a separate file with private fields, public getters and:  
@@ -134,7 +134,14 @@ setters, a constructor with and without parameters
 Done, EX: "Pokemon" class
 
 Overload a method:  
+Done, EX:  
+  static public void setEnc(int num) {  
+    enc = num;  
+  }  
 
+  static public void setEnc(double num) {  
+    enc = (int)num;  
+  }  
 
 Describe inheritance and its benefits:  
 Inheritance is the concept by which a subclass can inherit the fields and  
@@ -155,10 +162,10 @@ Declare, instantiate, initialize and use a one-dimensional array:
 Done  
 
 Manually find the smallest value in an array:  
-
+Done, EX: Least amount of balls used to catch a Pokemon/multiple Pokemon  
 
 Get a sum of the values in an array using an accumulator:  
-Done  
+Done, EX: Total amount of Safari Balls thrown  
 
 Search an array and identify the index where a value was found:  
 Done, toward the end of the program a for loop searches the array of all  
@@ -169,14 +176,15 @@ Create and use the enhanced for loop:
 Done at the end of the program  
 
 Declare, instantiate, initialize and use multi-dimensional arrays:  
-
+Done  
 
 Declare and use an ArrayList of a given type:  
-
+Done, EX: ArrayList<Integer> ThrownBalls= new ArrayList<Integer>(0);  
 
 Search a two-dimensional array and identify the coordinates  
 where a value was found:  
-
+Done, EX: search a two dimensional array for each instance of Oddish and  
+the corresponding number of safari balls used to catch it.  
 
 Effectively utilize exception handling for user input of an int:  
-Done at beginning of program (Somewhere around line 136)  
+Done at beginning of program (Line 154 at the time of writing this)  

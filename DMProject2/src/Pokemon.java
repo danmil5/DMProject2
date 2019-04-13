@@ -50,6 +50,10 @@ public class Pokemon {
   static public void setEnc(int num) {
     enc = num;
   }
+  
+  static public void setEnc(double num) {
+    enc = (int)num;
+  }
 
   public String getName() {
     return nickname;

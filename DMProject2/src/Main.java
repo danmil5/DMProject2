@@ -64,6 +64,7 @@
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -71,6 +72,15 @@ public class Main {
     // Create scanner and random tools
     Scanner scan = new Scanner(System.in);
     Random rand = new Random();
+    
+    // IMPORTANT: To change the duration of this program, change the two..
+    // variables below; "totalSteps" is used only in print statements, while..
+    // "steps" changes the actual amount of steps the user starts off with.
+    
+    // Initialize running integer variable to be used to track steps left
+    int steps = 15;
+    // Variable below used to reference starting amount of steps
+    int totalSteps = 15;
 
     // The catch rate variables are not used yet, however they do help to...
     // show an example of casting variables by creating integer-type copies...
@@ -78,20 +88,20 @@ public class Main {
     // since all variables regarding catch probability should be rounded down.
     
     // Constants used to track of catch factor and catch probability changes:
-    int chanToFact = 100/1275;
-    int factToChan = 1275/100;
-    int chanToProb = 100/225;
+    // int chanToFact = 100/1275;
+    // int factToChan = 1275/100;
+    // int chanToProb = 100/225;
     
-    double pikaCatchChance = 190*chanToFact;
-    int pikaFactor = (int) pikaCatchChance;
-    double pikaFactor2 = (double) pikaFactor;
+    // double pikaCatchChance = 190*chanToFact;
+    // int pikaFactor = (int) pikaCatchChance;
+    // double pikaFactor2 = (double) pikaFactor;
     // For this example, the catch factor will be increased by 3, which...
     // originally occurs when approaching the Pokemon for the first time.
-    pikaFactor2 = pikaFactor2 + 3;
-    double pikaNewFactor = pikaFactor2*factToChan;
-    int pikaNewCatch = (int) pikaNewFactor;
-    double pikaCatch2 = (double) pikaNewCatch;
-    double pikaCatchProb = pikaCatch2*chanToProb;
+    // pikaFactor2 = pikaFactor2 + 3;
+    // double pikaNewFactor = pikaFactor2*factToChan;
+    // int pikaNewCatch = (int) pikaNewFactor;
+    // double pikaCatch2 = (double) pikaNewCatch;
+    // double pikaCatchProb = pikaCatch2*chanToProb;
     // When a Safari Ball is thrown at this point, the random tool would be...
     // used, and if the random number from 1-100 is less than pikaCatchProb...
     // (which in this case is 84.7%) then the Pikachu will be caught.
@@ -116,8 +126,10 @@ public class Main {
     String oddNum;
     int oddCount = 0;
     
-    // Create an array to keep track of pokeballs thrown
-    int[] BallsThrown = new int[50];
+    // Create an arraylist to keep track of pokeballs thrown per pokemon
+    ArrayList<Integer> ThrownBalls= new ArrayList<Integer>(0);
+    
+    // Create variables used to keep track of the the total balls thrown
     int balls;
     int ballTrack = 0;
     int totalBalls = 0;
@@ -163,7 +175,7 @@ public class Main {
     System.out.println("Just to let you know," + 
         " your number divided by 2 is " + num2 / 2
         + " with " + "a remainder of " + num2 % 2 + 
-        ", and your number squared " + " is "
+        ", and your number squared is "
         + Math.pow(num2, 2) + "!");
 
     // Console output requirement
@@ -172,7 +184,8 @@ public class Main {
     + "you to the Hoenn Safari Zone!");
     int loopTest = 0;
     while (loopTest < 5) {
-      System.out.println("You'll have 20 steps, ready to begin? (y/n)");
+      System.out.println("You'll have " + totalSteps + 
+          " steps, ready to begin? (y/n)");
       // Check to see if user input begins with "y" using the "==" operator...
       // which determines if both sides of the expression equal 'y'.
       try {
@@ -215,8 +228,6 @@ public class Main {
     final double encRate = 35.5;
     // Initialize running integer variable to be used
     int encVar;
-    // Initialize running integer variable to be used
-    int steps = 20;
     // While loop requirement
     while (steps > 0) {
       // Mandatory ternary operator to determine if the word "only" is used
@@ -236,20 +247,20 @@ public class Main {
       // Generate a random number from 1 to 100 and compare it to the base..
       // encounter rate to determine if a Pokemon is encountered.
       encVar = rand.nextInt(100) + 1;
-      // line below is used to determine Pokemon level (higher lvl is more rare)
+      // line below is used to determine Pokemon level (higher lvl = more rare)
       Pokemon.setEnc(encVar);
-
-      // This was where the boolean variable I used in the example was...
-      // located, however it was much easier to do without it.
-
-      if (encVar < encRate) {
+      
+      // boolean serves as a backup in case the switch statement defaults
+      battle = encVar < encRate;
+      
+      if (battle) {
         // Call the encounterPmon method to determine which Pokemon appears
         enco = rand.nextInt(100);
+        
         // Use the randomly-generated "enco" variable as the argument, further
         // explained in the "Encounter" class
         pmon = Encounter.encounterPmon(enco);
-        battle = true;
-
+        
         // Use switch statement to display the encountered Pokemon
         switch (pmon) {
           case "Pikachu":
@@ -297,12 +308,13 @@ public class Main {
             if (caught >= 50) {
               System.out.println("You caught the wild " + pmon + "!");
               System.out.println("");
-              BallsThrown[ballTrack++] = balls;
+              ThrownBalls.add(balls);
+              ballTrack++;
               // Break statement will exit the loop if Pokemon has been caught
               System.out.println("Give your " + pmon + " a nickname:");
               newName = scan.nextLine();
               if (pmon == "Pikachu") {
-                if (newName.length() == 0) {
+                if (newName.length() == 0 || newName.equalsIgnoreCase(pmon)) {
                   PmonArray[pAcc] = new Pikachu(pmon);
                   System.out.println("Your " + pmon + " was sent to storage!");
                 }
@@ -351,31 +363,48 @@ public class Main {
       // Afterwards, repeat the method by prompting user to take another step
     }
     System.out.println("");
-    System.out.println("Your 20 steps are up! Here's everything you caught:");
+    System.out.println("Your " + totalSteps + 
+        " steps are up! Here's everything you caught:");
+    
+    if (pAcc == 0) {
+      System.out.println("You uh.. didn't catch anything..?");
+    }
     for (int pNum = 0; pNum < pAcc; pNum++)
       System.out.println(PmonArray[pNum].getName() + " the level " + 
       PmonArray[pNum].getLevel() + " " + PmonArray[pNum].getSpecies() +
-      " ( " + BallsThrown[pNum] + 
-      (BallsThrown[pNum] == 1 ? " ball" : " balls") + " used )");
+      " ( " + ThrownBalls.get(pNum) + 
+      (ThrownBalls.get(pNum) == 1 ? " ball" : " balls") + " used )");
     
     System.out.println("");
     
     // Array accumulator requirement
     for (int bNum = 0; bNum < ballTrack; bNum++) {
-      totalBalls += BallsThrown[bNum];
+      totalBalls += ThrownBalls.get(bNum);
     }
     totalBalls += wastedBalls;
     
     System.out.println("Extra Stats:");
     System.out.println("");
+    System.out.println("Total Balls Thrown and Wasted:");
     
     System.out.println("You threw a total of " + totalBalls + " Safari "
         + "balls, and " + wastedBalls + " went to waste.");
     
+    
+    // two-dimensional array requirement(s)
+    String[][] oddBalls = new String[pAcc][2];
+    for (int p1 = 0; p1 < pAcc; p1++) {
+      oddBalls[p1][0] = PmonArray[p1].getSpecies();
+      oddBalls[p1][1] = Integer.toString(ThrownBalls.get(p1));
+    }
+    
     System.out.println("");
+    System.out.println("List of Oddishes Caught:");
+    
+    // For loop lists how many Oddishes were caught
     
     for (int pNum = 0; pNum < pAcc; pNum++) {
-      if (PmonArray[pNum].getSpecies() == "Oddish") {
+      if (oddBalls[pNum][0] == "Oddish") {
         switch (pNum) {
           case 0:
             oddNum = "1st";
@@ -387,18 +416,88 @@ public class Main {
             oddNum = "3rd";
             break;
           default:
-            oddNum = (pNum += 1) + "th";
+            oddNum = (pNum + 1) + "th";
         }
-        System.out.println("Your "+oddNum+" caught Pokemon was an Oddish!");
+        System.out.println("Your "+oddNum+" caught Pokemon was an Oddish, "
+            + "and it took you " + oddBalls[pNum][1] + 
+            (Integer.parseInt(oddBalls[pNum][1]) == 1 ? " ball" : " balls") 
+            + " to catch!");
         oddCount++;
       }
     }
     
-    if (oddCount != 0) {
-      System.out.println("");
+    if (oddCount == 0) {
+      System.out.println("No Oddishes caught!");
     }
     
-    System.out.println("Thanks for playing!");
+    System.out.println("");
+    
+    int leastB = Integer.parseInt(oddBalls[0][1]);
+    
+    String[][] tiedLeast = new String[pAcc][2];
+    int tie = 0;
+    String leastNum;
+    
+    // For loop finds the lowest number of balls used to catch a pokemon
+    for (int cNum = 0; cNum < pAcc; cNum++) {
+      if (Integer.parseInt(oddBalls[cNum][1]) < leastB) {
+        leastB = cNum;
+      }
+    }
+    
+    // Sort each pokemon caught using the least number of balls
+    for (int cNum = 0; cNum < pAcc; cNum++) {
+      if (Integer.parseInt(oddBalls[cNum][1]) == leastB) {
+        switch (cNum) {
+          case 0:
+            leastNum = "1st";
+            break;
+          case 1:
+            leastNum = "2nd";
+            break;
+          case 2:
+            leastNum = "3rd";
+            break;
+          default:
+            leastNum = (cNum + 1) + "th";
+        }
+        if (oddBalls[cNum][0] == "Mouse Pokemon") {
+          tiedLeast[tie][0] = "Pikachu";
+        }
+        else if (oddBalls[cNum][0] != "Mouse Pokemon") {
+        tiedLeast[tie][0] = oddBalls[cNum][0];
+        }
+        tiedLeast[tie++][1] = leastNum;
+      }
+    }
+    
+    String lb = (leastB == 1 ? "ball" : "balls");
+    
+    System.out.println("Least Amount of Safari Balls Used to Catch Pokemon:");
+    
+    if (tie == 1) {
+      System.out.println("Your "+tiedLeast[0][1]+"-caught Pokemon ("
+          + tiedLeast[0][0] + ") took only " + leastB + " "+lb+" to catch!");
+    }
+    else if (tie == 2) {
+      System.out.println("Your "+tiedLeast[0][1]+"-caught Pokemon ("
+          + tiedLeast[0][0] + ") and your "+tiedLeast[1][1]+"-caught Pokemon ("
+          + tiedLeast[1][0] + ") took only " + leastB + " "+lb+" to catch!");
+    }
+    else if (tiedLeast.length > 2) {
+      System.out.print("Your "+tiedLeast[0][1]+"-caught Pokemon ("
+          + tiedLeast[0][0] + "),");
+      for (int fNum = 1; fNum < tie - 1; fNum++) {
+        System.out.print(" your "+tiedLeast[fNum][1]+"-caught Pokemon ("
+            + tiedLeast[fNum][0] + "),");
+      }
+      System.out.println(" and your "+tiedLeast[tie-1][1]+"-caught Pokemon (" 
+      + tiedLeast[tie-1][0] + ") all took only "+leastB+" "+lb+" to catch!");
+    }
+    
+    System.out.println("");
+    
+    System.out.println("Scroll up for more stats, and thanks for playing!");
     // This would be the part where the program tells the user what Pokemon...
     // they've caught and how many of each Pokemon they've caught.
     // Close the scanner
