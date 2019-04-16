@@ -40,6 +40,8 @@ public class Pokemon {
       case "Wobbuffet":
         level = (enc <= 15 ? 29 : 27);
         break;
+      case "Xatu":
+        level = 99;
     }
   }
 

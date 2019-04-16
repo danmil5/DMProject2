@@ -8,6 +8,9 @@
 // Girafarig - Catch Rate 60 - Encounter Rate 20%
 // Wobbuffet - Catch Rate 45 - Encounter Rate 10%
 
+// Catch rates of Pikachu and Oddish have been altered to more consistently..
+// display the polymorphism features of the Pikachu class
+
 // The header determines the name of the method "Enc", and determines which...
 // type of variable will be returned, which in this case is a string.
 
@@ -16,18 +19,18 @@
 // Pokemon will be encountered, the String value of which will be returned to
 // the Main class.
 public class Encounter {
+  
   public static String encounterPmon(int enco) {
     String pmon = "";
     // All statements below fulfill conditional operator requirements
 
     // Due to operator precedence, the relational operators >= and <= are..
     // evaluated before the conditional operator &&.
-
     if (enco >= 0 && enco <= 9) {
       pmon = "Pikachu";
-    } else if (enco >= 10 && enco <= 39) {
+    } else if (enco >= 10 && enco <= 44) {
       pmon = "Oddish";
-    } else if (enco >= 40 && enco <= 49) {
+    } else if (enco >= 45 && enco <= 49) {
       pmon = "Gloom";
     } else if (enco >= 50 && enco <= 59) {
       pmon = "Doduo";
@@ -38,8 +41,8 @@ public class Encounter {
     } else if (enco >= 90 && enco <= 99) {
       pmon = "Wobbuffet";
     } else {
-
+      pmon = "Pikachu";
     }
-      return pmon;
+    return pmon;
   }
 }
