@@ -148,14 +148,18 @@ public class Main {
     int num2 = 5;
     int testAcc;
     // For loop requirement
+    System.out.println("Welcome to the Hoenn Safari Zone! Let's use a quick "
+        + "test to make sure everything works properly before starting.");
+    System.out.println("Press \"\\ENTER\\\" to continue");
+    scan.nextLine();
     for (testAcc = 1; testAcc <= 5; testAcc++) {
-      System.out.println("Enter an integer less than 9!");
+      System.out.println("Please enter an integer less than 9:");
       num = scan.nextLine();
       try {
         num2 = Integer.parseInt(num);
       } catch (NumberFormatException e) {
         if (testAcc < 5)
-          System.out.println("Please type only integers!");
+          System.out.println("Type only integers please!");
         continue;
       }
       if ((num.compareTo("9") < 0) && (num2 < 9)) {
@@ -168,9 +172,11 @@ public class Main {
     }
 
     if (testAcc == 6) {
-      System.out.println("I think I've given you enough tries already..."
-          + " let's just pretend that you typed the number 5!");
+      System.out.println("I think I've given you enough tries already,"
+          + " let's just pretend that you typed the number 5...");
       num2 = 5;
+      System.out.println("Press \"\\ENTER\\\" to continue");
+      scan.nextLine();
     }
     System.out.println("Just to let you know," + 
         " your number divided by 2 is " + num2 / 2
@@ -180,8 +186,10 @@ public class Main {
     System.out.println("");
     // Console output requirement
     System.out.println(
-        "Now with all that out of the way, I'd like to welcome " 
+        "Now with that out of the way, I'd like to formally welcome " 
     + "you to the Hoenn Safari Zone!");
+    System.out.println("Press \"\\ENTER\\\" to continue");
+    scan.nextLine();
     int loopTest = 0;
     while (loopTest < 5) {
       System.out.println("You'll have " + totalSteps + 
@@ -193,16 +201,22 @@ public class Main {
         startLower = start.toLowerCase();
         startChar = startLower.charAt(0);
       } catch (StringIndexOutOfBoundsException ex) {
-        System.out.println("Sorry, could you try that again?");
         loopTest++;
+        if (loopTest != 5) {
+          System.out.println("Sorry, could you try that again?");
+        }
         if (loopTest >= 5) {
-          System.out.println("I've given you enough tries, so let's begin!");
+          System.out.println("You've had enough tries, let's start already!");
+          System.out.println("Press \"\\ENTER\\\" to continue");
+          scan.nextLine();
         }
         continue;
       }
       
       if (startChar == 'y') {
-        System.out.println("Great, let's begin!");
+        System.out.println("Great, let's start!");
+        System.out.println("Press \"\\ENTER\\\" to continue");
+        scan.nextLine();
         loopTest = 5;
       } else if (startChar == 'n') {
         System.out.println("Are you sure? (y/n)");
@@ -212,6 +226,8 @@ public class Main {
         // Equals method requirement
         if (confChar.equals("y")) {
           System.out.println("Well that's too bad, let's begin!");
+          System.out.println("Press \"\\ENTER\\\" to continue");
+          scan.nextLine();
           loopTest = 5;
         } else if (confChar.charAt(0) == 'n') {
           System.out.println("Alrighty then, I'll ask again!");
@@ -225,15 +241,16 @@ public class Main {
 
     // Initialize double variable to be used, using the final keyword so that..
     // its value will remain constant throughout the program
-    final double encRate = 35.5;
+    final double ENCRATE = 35.5;
     // Initialize running integer variable to be used
     int encVar;
     // While loop requirement
     while (steps > 0) {
       // Mandatory ternary operator to determine if the word "only" is used
       only = (steps <= 5 ? " only" : "");
-
-      System.out.println("");
+      if (steps != totalSteps) {
+        System.out.println("");
+      }
       if (steps != 1) {
       System.out.println("You" + only + " have " + steps + " steps left!");
       }
@@ -251,7 +268,7 @@ public class Main {
       Pokemon.setEnc(encVar);
       
       // boolean serves as a backup in case the switch statement defaults
-      battle = encVar < encRate;
+      battle = encVar < ENCRATE;
       
       if (battle) {
         // Call the encounterPmon method to determine which Pokemon appears
@@ -266,7 +283,7 @@ public class Main {
         try {
           System.out.println(RandMon.genMon(pmon));
         } catch (PmonException ex) {
-          System.out.println("There's no Pokemon to be found..?");
+          System.out.println("");
           battle = false;
         }
         
@@ -376,7 +393,7 @@ public class Main {
       + "balls, and " + wastedBalls + " went to waste.");
     
     
-    // two-dimensional array requirement(s)
+    // use a two-dimensional array requirement(s)
     String[][] oddBalls = new String[pAcc][2];
     for (int p1 = 0; p1 < pAcc; p1++) {
       oddBalls[p1][0] = pArray.get(p1).getSpecies();
@@ -386,7 +403,7 @@ public class Main {
     System.out.println("");
     System.out.println("List of Oddishes Caught:");
     
-    // For loop lists how many Oddishes were caught
+    // For loop finds and lists how many Oddishes were caught
     for (int pNum = 0; pNum < pAcc; pNum++) {
       if (oddBalls[pNum][0] == "Oddish") {
         switch (pNum) {
@@ -402,12 +419,19 @@ public class Main {
           default:
             oddNum = (pNum + 1) + "th";
         }
-        System.out.println("Your " + oddNum + " caught Pokemon was an Oddish, "
-        + "and it took you "
-            + oddBalls[pNum][1] + 
-            (Integer.parseInt(oddBalls[pNum][1]) == 1 ? " ball" : " balls")
-            + " to catch!");
-        oddCount++;
+        // Search a two-dimensional array requirement fulfilled below using a..
+        // try/catch block to only search for numerical values
+        for (int oNum = 0; oNum < oddBalls[pNum].length; oNum++) {
+          try {
+            System.out.println("Your " + oddNum + " caught Pokemon was an "
+                + "Oddish, and it took you "
+                  + Integer.parseInt(oddBalls[pNum][oNum]) + 
+            (Integer.parseInt(oddBalls[pNum][oNum]) == 1 ? " ball" : " balls")
+                    + " to catch!");
+          } catch (NumberFormatException en) {
+            continue;
+          }
+        }
       }
     }
 
@@ -426,7 +450,7 @@ public class Main {
     int tie = 0;
     String leastNum;
     
-    // For loop finds the lowest number of balls used to catch a pokemon
+    // For loop finds the lowest number of balls used to catch pokemon
     for (int cNum = 0; cNum < pAcc; cNum++) {
       if (Integer.parseInt(oddBalls[cNum][1]) < leastB) {
         leastB = cNum;
@@ -460,6 +484,8 @@ public class Main {
     }
     
     String lb = (leastB == 1 ? "ball" : "balls");
+    
+    // Print each pokemon that required the least amount of balls to catch
     
     System.out.println("Least Amount of Safari Balls Used to Catch Pokemon:");
 
