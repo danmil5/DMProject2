@@ -22,6 +22,7 @@ public class Encounter {
   
   /**
    * Determines which Pokemon is encountered and its level.
+   * @author Daniel Miller
    * @param enco The value used to determine the rarity of Pokemon encountered
    * @return The name of the Pokemon encountered
    */

@@ -19,6 +19,7 @@ public class Pokemon {
 
   /**
    * Creates a new Pokemon object to be stored in an array.
+   * @author Daniel Miller
    * @param nickname The nickname given to a Pokemon upon capture
    * @param species The species of the Pokemon captured
    */
