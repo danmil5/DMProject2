@@ -4,13 +4,13 @@
 
 // What to accomplish in later stages of this project:
 // Ask for user input to determine the direction of step the user takes.
-// With each step, use a random-number-generator alongside the original catch..
-// rates to determine if a Pokemon will spawn, what Pokemon it will be, and...
+// With each step, use a random-number-generator alongside the original catch
+// rates to determine if a Pokemon will spawn, what Pokemon it will be, and
 // the catch/escape rates of each pokemon throughout each encounter.
 // Use a running variable to limit steps to 50. (Actual # 500 in game)
-// Limit the number of Safari Balls to 30, and include other functions to...
+// Limit the number of Safari Balls to 30, and include other functions to
 // alter catch/escape rates - "go near", "throw PokeBlock", and "run".
-// Let the user know when the game is over, either when they run out of steps..
+// Let the user know when the game is over, either when they run out of steps
 // or Safari Balls, and display the names and amount of each Pokemon caught.
 
 // Only Pokemon from Area 1 will be implemented with the original catch rates..
@@ -62,25 +62,21 @@
 // of variables, most notably used when describing the ability of classes to...
 // access only private variables declared within that specific class.
 
-import java.util.Scanner;
-import java.util.Random;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
+  /** 
+   * Project Idea: Recreate the Safari Zone from Pokemon Emerald/Ruby/Sapphire.
+   * @author Daniel Miller
+   * @author dmmiller1361@eagle.fgcu.edu
+   */
   public static void main(String[] args) {
     // Create scanner and random tools
     Scanner scan = new Scanner(System.in);
     Random rand = new Random();
-    
-    // IMPORTANT: To change the duration of this program, change the two..
-    // variables below; "totalSteps" is used only in print statements, while..
-    // "steps" changes the actual amount of steps the user starts off with.
-    
-    // Initialize running integer variable to be used to track steps left
-    int steps = 25;
-    // Variable below used to reference starting amount of steps
-    int totalSteps = 25;
 
     // The catch rate variables are not used yet, however they do help to...
     // show an example of casting variables by creating integer-type copies...
@@ -119,8 +115,8 @@ public class Main {
     int caught;
     
     // Create an array to store Pokemon objects
-    ArrayList<Pokemon> pArray= new ArrayList<Pokemon>(0);
-    int pAcc = 0;
+    ArrayList<Pokemon> pokArray = new ArrayList<Pokemon>(0);
+    int pokAcc = 0;
     
     // Create an arraylist to keep track of pokeballs thrown per pokemon
     ArrayList<Integer> thrownBalls = new ArrayList<Integer>(0);
@@ -151,8 +147,9 @@ public class Main {
       try {
         num2 = Integer.parseInt(num);
       } catch (NumberFormatException e) {
-        if (testAcc < 5)
+        if (testAcc < 5) {
           System.out.println("Type only integers please!");
+        }
         continue;
       }
       if ((num.compareTo("9") < 0) && (num2 < 9)) {
@@ -171,25 +168,34 @@ public class Main {
       System.out.println("Press \"\\ENTER\\\" to continue");
       scan.nextLine();
     }
-    System.out.println("Just to let you know," + 
-        " your number divided by 2 is " + num2 / 2
-        + " with " + "a remainder of " + num2 % 2 + 
-        ", and your number squared is "
+    System.out.println("Just to let you know," 
+        + " your number divided by 2 is " + num2 / 2
+        + " with " + "a remainder of " + num2 % 2 
+        + ", and your number squared is "
         + Math.pow(num2, 2) + "!");
     System.out.println("");
     // Console output requirement
     System.out.println(
         "Now with that out of the way, I'd like to formally welcome " 
-    + "you to the Hoenn Safari Zone!");
+            + "you to the Hoenn Safari Zone!");
     System.out.println("Press \"\\ENTER\\\" to continue");
     scan.nextLine();
+    
+    // To change the duration of this program, change the two..
+    // variables below; "totalSteps" is used only in print statements, while..
+    // "steps" changes the actual amount of steps the user starts off with.
+    
+    // Initialize running integer variable to be used to track steps left
+    int steps = 25;
+    // Variable below used to reference starting amount of steps
+    int totalSteps = 25;
     
     // call method to ask for confirmation before starting rest of the program
     confirmStart(totalSteps, scan);
 
     // Initialize double variable to be used, using the final keyword so that..
     // its value will remain constant throughout the program
-    final double ENCRATE = 35.5;
+    final double encRate = 35.5;
     // Initialize running integer variable to be used
     int encVar;
     // While loop requirement
@@ -200,9 +206,8 @@ public class Main {
         System.out.println("");
       }
       if (steps != 1) {
-      System.out.println("You" + only + " have " + steps + " steps left!");
-      }
-      else if (steps == 1) {
+        System.out.println("You" + only + " have " + steps + " steps left!");
+      } else if (steps == 1) {
         System.out.println("You" + only + " have " + steps + " step left!");
       }
       System.out.println("Press \"\\ENTER\\\" to continue.");
@@ -216,7 +221,7 @@ public class Main {
       Pokemon.setEnc(encVar);
       
       // boolean serves as a backup in case the switch statement defaults
-      battle = encVar < ENCRATE;
+      battle = encVar < encRate;
       
       if (battle) {
         // Call the encounterPmon method to determine which Pokemon appears
@@ -229,12 +234,11 @@ public class Main {
         
         // Use switch statement to display the encountered Pokemon
         try {
-          System.out.println(RandMon.genMon(pmon));
+          genMon(pmon);
         } catch (PmonException ex) {
           System.out.println("");
           battle = false;
         }
-        
 
         if (battle) {
           // All battle-related code goes here
@@ -261,35 +265,30 @@ public class Main {
               newName = scan.nextLine();
               if (pmon.equals("Pikachu")) {
                 if (newName.length() == 0 || newName.equalsIgnoreCase(pmon)) {
-                  pArray.add(new Pikachu(pmon));
+                  pokArray.add(new Pikachu(pmon));
                   System.out.println("Your " + pmon + " was sent to storage!");
-                }
-                else {
-                  pArray.add(new Pokemon(newName, pmon));
+                } else {
+                  pokArray.add(new Pokemon(newName, pmon));
                   System.out.println(newName + " was sent to storage!");
                 }
-              } 
-              else {
+              } else {
                 if (newName.length() == 0) {
-                  pArray.add(new Pokemon(pmon));
+                  pokArray.add(new Pokemon(pmon));
                   System.out.println("Your " + pmon + " was sent to storage!");
-                } 
-                else {
-                  pArray.add(new Pokemon(newName, pmon));
+                } else {
+                  pokArray.add(new Pokemon(newName, pmon));
                   System.out.println(newName + " was sent to storage!");
                 }
               }
-              pAcc++;
+              pokAcc++;
               break;
-            }
-            else if (caught >= 25 && caught < 50) {
+            } else if (caught >= 25 && caught < 50) {
               // If the ball misses, the next loop will be iterated before..
               // the Pokemon has a chance to flee.
               System.out.println("The Safari Ball missed! Try again!");
               System.out.println("");
               continue;
-            } 
-            else {
+            } else {
               System.out.println("The " + pmon + " broke free!");
               System.out.println("");
               flee = rand.nextInt(100);
@@ -297,7 +296,7 @@ public class Main {
               escape += 5;
               if (flee <= 3 * escape) {
                 System.out.println("The wild " + pmon + " escaped!");
-                wastedBalls+=balls;
+                wastedBalls += balls;
               }
             }   
           } while (flee > 3 * escape);
@@ -310,25 +309,27 @@ public class Main {
       // Afterwards, repeat the method by prompting user to take another step
     }
     System.out.println("");
-    System.out.println("Your " + totalSteps + 
-        " steps are up! Here's everything you caught:");
+    System.out.println("Your " + totalSteps 
+        + " steps are up! Here's everything you caught:");
     
-    if (pArray.size() == 0) {
+    if (pokArray.size() == 0) {
       System.out.println("You uh.. didn't catch anything..?");
-      pAcc = 0;
+      pokAcc = 0;
     }
     
-    for (int pNum = 0; pNum < pAcc; pNum++)
-      System.out.println(pArray.get(pNum).getName() + " the level " + 
-          pArray.get(pNum).getLevel() + " " + pArray.get(pNum).getSpecies() +
-      " ( " + thrownBalls.get(pNum) + 
-      (thrownBalls.get(pNum) == 1 ? " ball" : " balls") + " used )");
+    for (int pokNum = 0; pokNum < pokAcc; pokNum++) {
+      System.out.println(pokArray.get(pokNum).getName() + " the level "
+          + pokArray.get(pokNum).getLevel() + " " 
+          + pokArray.get(pokNum).getSpecies()
+          + " ( " + thrownBalls.get(pokNum) 
+          + (thrownBalls.get(pokNum) == 1 ? " ball" : " balls") + " used )");
+    }
     
     System.out.println("");
     
     // Array accumulator requirement
-    for (int bNum = 0; bNum < ballTrack; bNum++) {
-      totalBalls += thrownBalls.get(bNum);
+    for (int ballNum = 0; ballNum < ballTrack; ballNum++) {
+      totalBalls += thrownBalls.get(ballNum);
     }
     totalBalls += wastedBalls;
     
@@ -338,13 +339,13 @@ public class Main {
     
 
     System.out.println("You threw a total of " + totalBalls + " Safari "
-      + "balls, and " + wastedBalls + " went to waste.");
+        + "balls, and " + wastedBalls + " went to waste.");
     
     
     // use a two-dimensional array requirement(s)
-    String[][] oddBalls = new String[pAcc][2];
-    for (int p1 = 0; p1 < pAcc; p1++) {
-      oddBalls[p1][0] = pArray.get(p1).getSpecies();
+    String[][] oddBalls = new String[pokAcc][2];
+    for (int p1 = 0; p1 < pokAcc; p1++) {
+      oddBalls[p1][0] = pokArray.get(p1).getSpecies();
       oddBalls[p1][1] = Integer.toString(thrownBalls.get(p1));
     }
     
@@ -352,27 +353,27 @@ public class Main {
     System.out.println("List of Oddishes Caught:");
     
     // call method to print number of oddishes caught
-    numOddishes(pAcc, oddBalls);
+    numOddishes(pokAcc, oddBalls);
  
     System.out.println("");
     int leastB = 0;
     leastB = Integer.parseInt(oddBalls[0][1]);
     
-    String[][] tiedLeast = new String[pAcc][2];
+    String[][] tiedLeast = new String[pokAcc][2];
     int tie = 0;
     String leastNum;
     
     // For loop finds the lowest number of balls used to catch pokemon
-    for (int cNum = 0; cNum < pAcc; cNum++) {
-      if (Integer.parseInt(oddBalls[cNum][1]) < leastB) {
-        leastB = cNum;
+    for (int compareNum = 0; compareNum < pokAcc; compareNum++) {
+      if (Integer.parseInt(oddBalls[compareNum][1]) < leastB) {
+        leastB = compareNum;
       }
     }
-    
+
     // Sort each pokemon caught using the least number of balls
-    for (int cNum = 0; cNum < pAcc; cNum++) {
-      if (Integer.parseInt(oddBalls[cNum][1]) == leastB) {
-        switch (cNum) {
+    for (int compareNum2 = 0; compareNum2 < pokAcc; compareNum2++) {
+      if (Integer.parseInt(oddBalls[compareNum2][1]) == leastB) {
+        switch (compareNum2) {
           case 0:
             leastNum = "1st";
             break;
@@ -383,13 +384,12 @@ public class Main {
             leastNum = "3rd";
             break;
           default:
-            leastNum = (cNum + 1) + "th";
+            leastNum = (compareNum2 + 1) + "th";
         }
-        if (oddBalls[cNum][0] == "Mouse Pokemon") {
+        if (oddBalls[compareNum2][0] == "Mouse Pokemon") {
           tiedLeast[tie][0] = "Pikachu";
-        }
-        else if (oddBalls[cNum][0] != "Mouse Pokemon") {
-        tiedLeast[tie][0] = oddBalls[cNum][0];
+        } else if (oddBalls[compareNum2][0] != "Mouse Pokemon") {
+          tiedLeast[tie][0] = oddBalls[compareNum2][0];
         }
         tiedLeast[tie++][1] = leastNum;
       }
@@ -409,6 +409,36 @@ public class Main {
     scan.close();
   }
   
+  // method lets the user know what Pokemon they have encountered
+  private static void genMon(String mon) throws PmonException {
+    switch (mon) {
+      case "Pikachu":
+        System.out.println("You have encountered a wild Pikachu!");
+        break;
+      case "Oddish":
+        System.out.println("You have encountered a wild Oddish!");
+        break;
+      case "Gloom":
+        System.out.println("You have encountered a wild Gloom!");
+        break;
+      case "Doduo":
+        System.out.println("You have encountered a wild Doduo!");
+        break;
+      case "Natu":
+        System.out.println("You have encountered a wild Natu!");
+        break;
+      case "Girafarig":
+        System.out.println("You have encountered a wild Girafarig!");
+        break;
+      case "Wobbuffet":
+        System.out.println("You have encountered a wild Wobbuffet!");
+        break;
+      default:
+        throw new PmonException("There's no Pokemon to be found..?");
+    }
+    
+  }
+
   // Methods
   
   // method prints intro text
@@ -427,8 +457,8 @@ public class Main {
     String startLower;
     
     while (loopTest < 5) {
-      System.out.println("You'll have " + totalSteps + 
-          " steps, ready to begin? (y/n)");
+      System.out.println("You'll have " + totalSteps 
+          + " steps, ready to begin? (y/n)");
       // Check to see if user input begins with "y" using the "==" operator...
       // which determines if both sides of the expression equal 'y'.
       try {
@@ -475,14 +505,14 @@ public class Main {
     }
   }
   
-  private static void numOddishes(int pAcc, String oddBalls[][]) {
+  private static void numOddishes(int pokAcc, String[][] oddBalls) {
     String oddPos;
     int oddCount = 0;
     // For loop finds and lists how many Oddishes were caught
-    for (int pNum = 0; pNum < pAcc; pNum++) {
-      for (int oNum = 0; oNum < oddBalls[pNum].length; oNum++) {
-        if (oddBalls[pNum][0] == "Oddish") {
-          switch (pNum) {
+    for (int pokNum = 0; pokNum < pokAcc; pokNum++) {
+      for (int oddNum = 0; oddNum < oddBalls[pokNum].length; oddNum++) {
+        if (oddBalls[pokNum][0] == "Oddish") {
+          switch (pokNum) {
             case 0:
               oddPos = "1st";
               break;
@@ -493,18 +523,19 @@ public class Main {
               oddPos = "3rd";
               break;
             default:
-              oddPos = (pNum + 1) + "th";
+              oddPos = (pokNum + 1) + "th";
           }
           try {
             System.out.println("Your " + oddPos + " caught Pokemon was an "
                 + "Oddish, and it took you "
-                  + Integer.parseInt(oddBalls[pNum][oNum]) + 
-            (Integer.parseInt(oddBalls[pNum][oNum]) == 1 ? " ball" : " balls")
+                  + Integer.parseInt(oddBalls[pokNum][oddNum]) 
+                + (Integer.parseInt(oddBalls[pokNum][oddNum]) == 1 
+                ? " ball" : " balls")
                     + " to catch!");
             oddCount++;
-            } catch (NumberFormatException en) {
-              continue;
-            } 
+          } catch (NumberFormatException en) {
+            continue;
+          } 
         }
       }
     }
@@ -518,24 +549,24 @@ public class Main {
       String[][] tiedLeast) {
     if (tie == 1) {
       System.out.println("Your " + tiedLeast[0][1] + "-caught Pokemon (" 
-    + tiedLeast[0][0]
+            + tiedLeast[0][0]
           + ") took only " + leastB + " " + lb + " to catch!");
     } else if (tie == 2) {
       System.out.println("Your " + tiedLeast[0][1] + "-caught Pokemon (" 
-    + tiedLeast[0][0]
-          + ") and your " + tiedLeast[1][1] + "-caught Pokemon (" + 
-    tiedLeast[1][0]
+          + tiedLeast[0][0]
+          + ") and your " + tiedLeast[1][1] + "-caught Pokemon (" 
+          + tiedLeast[1][0]
           + ") took only " + leastB + " " + lb + " to catch!");
     } else if (tie > 2) {
-      System.out.print("Your " + tiedLeast[0][1] + "-caught Pokemon (" + 
-    tiedLeast[0][0] + "),");
-      for (int fNum = 1; fNum < tie - 1; fNum++) {
+      System.out.print("Your " + tiedLeast[0][1] + "-caught Pokemon (" 
+          + tiedLeast[0][0] + "),");
+      for (int posNum = 1; posNum < tie - 1; posNum++) {
         System.out.print(
-            " your " + tiedLeast[fNum][1] + "-caught Pokemon (" + 
-        tiedLeast[fNum][0] + "),");
+            " your " + tiedLeast[posNum][1] + "-caught Pokemon (" 
+            + tiedLeast[posNum][0] + "),");
       }
-      System.out.println(" and your " + tiedLeast[tie - 1][1] + 
-          "-caught Pokemon ("
+      System.out.println(" and your " + tiedLeast[tie - 1][1] 
+          + "-caught Pokemon ("
           + tiedLeast[tie - 1][0] + ") all took only " + leastB + " " 
           + lb + " to catch!");
     }

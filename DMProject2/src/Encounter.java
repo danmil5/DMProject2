@@ -20,6 +20,11 @@
 // the Main class.
 public class Encounter {
   
+  /**
+   * Determines which Pokemon is encountered and its level.
+   * @param enco The value used to determine the rarity of Pokemon encountered
+   * @return The name of the Pokemon encountered
+   */
   public static String encounterPmon(int enco) {
     String pmon = "";
     // All statements below fulfill conditional operator requirements

@@ -4,7 +4,7 @@ public class Pokemon {
   protected String nickname;
   protected String species;
   protected int level;
-  static protected int enc;
+  protected static int enc;
 
   // This constructor is used in the event of an error when creating an..
   // instance of the Pokemon class without any arguments which shouldn't occur
@@ -17,6 +17,11 @@ public class Pokemon {
     this(spec, spec);
   }
 
+  /**
+   * Creates a new Pokemon object to be stored in an array.
+   * @param nickname The nickname given to a Pokemon upon capture
+   * @param species The species of the Pokemon captured
+   */
   public Pokemon(String nickname, String species) {
     this.nickname = nickname;
     this.species = species;
@@ -44,6 +49,7 @@ public class Pokemon {
       case "Wobbuffet":
         level = (enc <= 15 ? 29 : 27);
         break;
+      default:
     }
   }
 
@@ -53,11 +59,11 @@ public class Pokemon {
   }
 
   // Overload requirement in the event that the encounter variable is a double
-  static public void setEnc(int num) {
+  public static void setEnc(int num) {
     enc = num;
   }
   
-  static public void setEnc(double num) {
+  public static void setEnc(double num) {
     enc = (int)num;
   }
 
